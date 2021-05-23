@@ -1,0 +1,61 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    position="end"
+    [fixedInViewport]="false"
+    [mode]="'over'"
+  >
+    <mat-toolbar color="primary">Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/homepage">Home</a>
+      <a mat-list-item routerLink="/aboutcovid">About Covid-19</a>
+      <!-- <a mat-list-item routerLink="#">Help</a> -->
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="display-flex">
+      <button
+        type="button"
+        aria-label="toolbar back button"
+        mat-icon-button
+        *ngIf="displayBackButton"
+        (click)= "onClickBackButton()"
+      >
+      <mat-icon>arrow_back_ios</mat-icon>
+      </button>
+      <span>Covid-app</span>
+      <div class="menuBtns">
+      <app-menu [initialValue]="'en'" [options]="languageArray" (onItemSelect)="onLanguageChange($event)"></app-menu>
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        class=""
+      >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+    </div>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid">
+      <div fxFlex="65%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%">
+        <app-table-view
+          [columnsToDisplay]="columnsToDisplay"
+          [isState]="isState"
+          [stateNameToDisplay]="stateNameToDisplay"
+          [disableRowClick]="showStateGraph"
+        ></app-table-view>
+      </div>
+      <div fxFlex="35%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%">
+        <div *ngIf="showStateGraph; else indaGraphs">
+          <app-state-graph></app-state-graph>
+        </div>
+        <ng-template #indaGraphs>
+          <app-graphs></app-graphs>
+        </ng-template>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

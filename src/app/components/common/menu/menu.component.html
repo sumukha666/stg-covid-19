@@ -1,0 +1,8 @@
+<button mat-button [matMenuTriggerFor]="beforeMenu">
+  <mat-icon aria-hidden="false" aria-label="Translate icon">translate</mat-icon>
+</button>
+<mat-menu #beforeMenu="matMenu" xPosition="before">
+  <button mat-menu-item *ngFor="let option of options" [value]="option.value" (click)="onMenuClick(option.value)">
+    {{ option.viewValue }}
+  </button>
+</mat-menu>

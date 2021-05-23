@@ -1,0 +1,56 @@
+.sidenav-container {
+    height: 100%;
+  }
+  
+  .sidenav {
+    width: 200px;
+  }
+  
+  .sidenav {
+    background: inherit;
+  }
+  
+  .mat-toolbar.mat-primary {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  
+  .content {
+    padding: 1rem;
+  }
+  .cardImage{
+    height: 200px;
+    padding: 2rem;
+    width: 90%;
+  }
+
+  .margin-top {
+    margin-top: 5px;
+  }
+
+  .cardFlex{
+    align-items: stretch;
+
+  }
+  mat-card{
+    min-height: 530px;
+  }
+
+  ul {
+    font-size: 15px;
+  }
+
+
+.menuBtn{
+  margin-left: auto;
+}
+
+.display-flex {
+  display: flex;
+}
+
+.menuBtns{
+  margin-left: auto;
+  flex-direction: row-reverse;
+}
