@@ -1,0 +1,266 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    position="end"
+    [fixedInViewport]="false"
+    [mode]="'over'"
+  >
+    <mat-toolbar color="primary">Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/homepage">Home</a>
+      <a mat-list-item routerLink="/aboutcovid">About Covid-19</a>
+      <!-- <a mat-list-item routerLink="#">Help</a> -->
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary"  class="display-flex">
+      <span>Covid-app</span>
+      <div class="menuBtns">
+        <app-menu [initialValue]="'en'" [options]="languageArray" (onItemSelect)="onLanguageChange($event)"></app-menu>
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        class="menuBtn"
+      >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      </div>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <!-- <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid">
+      <div fxFlex="65%" fxFlex.xs="100%" fxFlex.sm="100%">
+        left
+      </div>
+      <div fxFlex="35%" fxFlex.xs="100%" fxFlex.sm="100%">
+          right
+      </div> 
+    </div> -->
+
+    <div
+      fxLayout="row wrap"
+      fxLayout.lt-sm="column"
+      fxLayoutGap="32px"
+      fxLayoutAlign="stretch"
+    >
+      <!-- card 1 -->
+      <mat-card
+        class="example-card margin-top"
+        fxFlex="0 1 calc(33.3% - 32px)"
+        fxFlex.lt-md="0 1 calc(50% - 32px)"
+        fxFlex.lt-sm="100%"
+        [style.height]="'100%'"
+      >
+        <mat-card-header>
+          <mat-card-title>{{'aboutCovid.card1.header' | translate}}</mat-card-title>
+        </mat-card-header>
+        <img
+          mat-card-image
+          src="assets/images/coronavirus.jpg"
+          alt="Photo of a person holding coronavirus tag"
+          class="cardImage"
+        />
+        <mat-card-content>
+          <p>
+            {{'aboutCovid.card1.para1' | translate}}
+          </p>
+          <p>
+            {{'aboutCovid.card1.para2' | translate}}
+          </p>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- card 2 -->
+      <mat-card
+        class="example-card margin-top"
+        fxFlex="0 1 calc(33.3% - 32px)"
+        fxFlex.lt-md="0 1 calc(50% - 32px)"
+        fxFlex.lt-sm="100%"
+        [style.height]="'100%'"
+      >
+        <mat-card-header>
+          <mat-card-title>{{'aboutCovid.card2.header' | translate}}</mat-card-title>
+        </mat-card-header>
+        <img
+          mat-card-image
+          src="assets/images/what_is_corona.jpg"
+          alt="Photo of a coronavirus"
+          class="cardImage"
+        />
+        <mat-card-content>
+          <p>
+            {{'aboutCovid.card2.para1' | translate}}
+          </p>
+          <p>
+            {{'aboutCovid.card2.para2' | translate}}
+          </p>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- card 3 -->
+      <mat-card
+        class="example-card margin-top"
+        fxFlex="0 1 calc(33.3% - 32px)"
+        fxFlex.lt-md="0 1 calc(50% - 32px)"
+        fxFlex.lt-sm="100%"
+        [style.height]="'100%'"
+      >
+        <mat-card-header>
+          <mat-card-title>{{'aboutCovid.card3.header' | translate}}</mat-card-title>
+        </mat-card-header>
+        <img
+          mat-card-image
+          src="assets/images/symptoms.jpg"
+          alt="Photo of a person wearing mask"
+          class="cardImage"
+        />
+        <mat-card-content>
+          <p>
+            {{'aboutCovid.card3.para1' | translate}}
+          </p>
+          <ul>
+            <li>
+              {{'aboutCovid.card3.list.point1' | translate}}
+            </li>
+            <li>
+              {{'aboutCovid.card3.list.point2' | translate}}
+            </li>
+            <li>
+              {{'aboutCovid.card3.list.point3' | translate}}
+            </li>
+            <li>
+              {{'aboutCovid.card3.list.point4' | translate}}
+            </li>
+            <li>
+              {{'aboutCovid.card3.list.point5' | translate}}
+            </li>
+            <li>
+              {{'aboutCovid.card3.list.point6' | translate}}
+            </li>
+          </ul>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- card 4 -->
+      <mat-card
+        class="example-card margin-top"
+        fxFlex="0 1 calc(33.3% - 32px)"
+        fxFlex.lt-md="0 1 calc(50% - 32px)"
+        fxFlex.lt-sm="100%"
+        [style.height]="'100%'"
+      >
+        <mat-card-header>
+          <mat-card-title
+            >{{'aboutCovid.card4.header' | translate}}</mat-card-title
+          >
+        </mat-card-header>
+        <img
+          mat-card-image
+          src="assets/images/infection.jpg"
+          alt="Photo of a person caughing"
+          class="cardImage"
+        />
+        <mat-card-content>
+          <p>
+            {{'aboutCovid.card4.para1' | translate}}
+          </p>
+          <ul>
+            <li>
+              {{'aboutCovid.card4.list.point1' | translate}}
+            </li>
+            <li>
+              {{'aboutCovid.card4.list.point2' | translate}}
+            </li>
+            <li>
+              {{'aboutCovid.card4.list.point3' | translate}}
+            </li>
+            <li>
+              {{'aboutCovid.card4.list.point4' | translate}}
+            </li>
+            <li>
+              {{'aboutCovid.card4.list.point5' | translate}}
+            </li>
+            <li>
+              {{'aboutCovid.card4.list.point6' | translate}}
+            </li>
+          </ul>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- card 5 -->
+      <mat-card
+        class="example-card margin-top"
+        fxFlex="0 1 calc(33.3% - 32px)"
+        fxFlex.lt-md="0 1 calc(50% - 32px)"
+        fxFlex.lt-sm="100%"
+        [style.height]="'100%'"
+      >
+        <mat-card-header>
+          <mat-card-title>{{'aboutCovid.card5.header' | translate}}</mat-card-title>
+        </mat-card-header>
+        <img
+          mat-card-image
+          src="assets/images/types.jpg"
+          alt="Photo of a CoronaVirus testing"
+          class="cardImage"
+        />
+        <mat-card-content>
+          <p>
+            {{'aboutCovid.card5.para1' | translate}}
+          </p>
+          <ul>
+            <li>
+              {{'aboutCovid.card5.list.point1' | translate}}
+            </li>
+            <li>
+              {{'aboutCovid.card5.list.point2' | translate}}
+            </li>
+            <li>
+              {{'aboutCovid.card5.list.point3' | translate}}
+            </li>
+            <li>
+              {{'aboutCovid.card5.list.point4' | translate}}
+            </li>
+          </ul>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- card 6 -->
+      <mat-card
+        class="example-card margin-top"
+        fxFlex="0 1 calc(33.3% - 32px)"
+        fxFlex.lt-md="0 1 calc(50% - 32px)"
+        fxFlex.lt-sm="100%"
+        [style.height]="'100%'"
+      >
+        <mat-card-header>
+          <mat-card-title>{{'aboutCovid.card6.header' | translate}}</mat-card-title>
+        </mat-card-header>
+        <img
+          mat-card-image
+          src="assets/images/transmission.jpg"
+          alt="Photo of a Transmission among people"
+          class="cardImage"
+        />
+        <mat-card-content>
+          <p>
+            {{'aboutCovid.card6.para1' | translate}}
+          </p>
+          <ul>
+            <li>
+              {{'aboutCovid.card6.list.point1' | translate}}
+            </li>
+            <li>
+              {{'aboutCovid.card6.list.point2' | translate}}
+            </li>
+            <li>
+              {{'aboutCovid.card6.list.point3' | translate}}
+            </li>
+          </ul>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

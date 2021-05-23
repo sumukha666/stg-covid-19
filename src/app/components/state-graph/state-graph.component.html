@@ -1,0 +1,52 @@
+<mat-card class="example-card margin-1rem">
+  <div *ngIf="isGraphError; else dispGraph">
+    <mat-card-title>Covid-19 Cases in India</mat-card-title>
+    <p class="dispError">Something went wrong, please try again later</p>
+  </div>
+  <ng-template #dispGraph>
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{("graph.graphHeading" | translate) +" - "+ ("tableColumn."+ stateName | translate)}}</mat-card-title>
+    </mat-card-header>
+    <form class="example-form">
+      <mat-form-field class="example-full-width padding-sides-1rem">
+        <input
+          type="text"
+          placeholder="{{'graph.selectDistrict' | translate}}"
+          aria-label="Number"
+          matInput
+          [formControl]="myControl"
+          [matAutocomplete]="auto"
+          [(ngModel)]="selectedDistrict.value"
+        />
+        <mat-autocomplete
+          #auto="matAutocomplete"
+          (optionSelected)="onStateChange($event)"
+        >
+          <mat-option
+            *ngFor="let option of filteredOptions | async"
+            [value]="option"
+          >
+            {{ 'stateColumn.'+this.stateName+'.'+option | translate }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
+    <div *ngIf="districtData.length === 0; else showGraph" class="textCenter">
+      <mat-spinner></mat-spinner>
+    </div>
+    <ng-template #showGraph>
+      <div class="graphId">
+        <google-chart
+          [title]="(districtTitle | translate) +' ' +('graph.graphHeading' | translate)"
+          [type]="districtType"
+          [data]="districtData"
+          [options]="stateoptions"
+          [width]="width"
+          [height]="height"
+        >
+        </google-chart>
+      </div>
+    </ng-template>
+  </ng-template>
+</mat-card>

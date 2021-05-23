@@ -1,0 +1,112 @@
+<mat-card class="example-card">
+  <div *ngIf="isGraphError; else dispGraph">
+    <mat-card-title>{{("graph.graphHeading" | translate) + " - "+ ("country" | translate)}}</mat-card-title>
+    <p class="dispError">{{"errorMessage" | translate}}</p>
+  </div>
+  <ng-template #dispGraph>
+    <mat-card-header>
+      <mat-card-title>{{("graph.graphHeading" | translate) + " - "+ ("country" | translate)}}</mat-card-title>
+    </mat-card-header>
+    <div *ngIf="data.length === 0; else showGraph" class="textCenter">
+      <mat-spinner></mat-spinner>
+    </div>
+
+    <ng-template #showGraph>
+      <div class="graphId1">
+        <google-chart
+          [title]="title | translate"
+          [type]="type"
+          [data]="data"
+          [options]="options"
+          [width]="width"
+          [height]="height"
+        >
+        </google-chart>
+      </div>
+    </ng-template>
+
+    <mat-card-actions class="display-flex spaceBetween">
+      <mat-form-field appearance="outline">
+        <mat-label>{{"graph.selectAttribute" | translate}}</mat-label>
+        <mat-select
+          matNativeControl
+          (valueChange)="onOptionSelect($event)"
+          [value]="'confirmData confirmedCase'"
+        >
+          <mat-option value="confirmData confirmedCase" selected
+            >{{"graph.confirmedCase" | translate}}</mat-option
+          >
+          <mat-option value="recoveredData recoveredCase"
+            >{{"graph.recoveredCase" | translate}}</mat-option
+          >
+          <mat-option value="deceasedData deceasedCase"
+            >{{"graph.deceasedCase" | translate}}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="last15Days($event)"
+        class="btn"
+      >
+      {{"graph.last15Days" | translate}}
+      </button>
+    </mat-card-actions>
+  </ng-template>
+</mat-card>
+
+<mat-card class="example-card margin-top-10px">
+  <div *ngIf="isStateGraphError; else dispStateGraph">
+    <mat-card-title>{{("graph.graphHeading" | translate) + " - "+ ("country" | translate)}}</mat-card-title>
+    <p class="dispError">>{{"errorMessage" | translate}}</p>
+  </div>
+  <ng-template #dispStateGraph>
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{("graph.graphHeading" | translate) + " - "+ ("country" | translate)}}</mat-card-title>
+    </mat-card-header>
+    <form class="example-form">
+      <mat-form-field class="example-full-width padding-sides-1rem">
+        <input
+          type="text"
+          placeholder="{{'graph.selectState' | translate}}"
+          aria-label="Number"
+          matInput
+          [formControl]="myControl"
+          [matAutocomplete]="auto"
+          [(ngModel)]="selectedStateOption.value"
+        />
+        <mat-autocomplete
+          #auto="matAutocomplete"
+          (optionSelected)="onStateChange($event)"
+        >
+          <mat-option
+            *ngFor="let option of filteredOptions | async"
+            [value]="option"
+          >
+            {{"tableColumn." + option | translate}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
+    <div *ngIf="stateData.length === 0; else showStateGraph" class="textCenter">
+      <mat-spinner></mat-spinner>
+    </div>
+    <ng-template #showStateGraph>
+      <div class="graphId2">
+        <google-chart
+          [title]="(stateTitle | translate) +' ' +('graph.graphHeading' | translate)"
+          [type]="stateType"
+          [data]="stateData"
+          [options]="stateoptions"
+          [width]="width"
+          [height]="height"
+        >
+        </google-chart>
+      </div>
+    </ng-template>
+  </ng-template>
+</mat-card>
+<!-- "[stateoptions[0] | translate, stateoptions[1] | translate, stateoptions[2] | translate, stateoptions[3] | translate] -->
